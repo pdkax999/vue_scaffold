@@ -1,71 +1,41 @@
 <template>
-   <div class="todo-container">
-    <div class="todo-wrap">
-      <Header  :addTodos='addTodos' />
-      <List :todos="todos" :updateTodo='updateTodo' :removeTodo='removeTodo' />
-      <Footer :todos='todos' :clearTodos='clearTodos' :ischeckall='ischeckall'/>
+  
+ <div>
+    <div class="row">
+      <div class="col-xs-offset-2 col-xs-8">
+        <div class="page-header"><h2>React Router Demo</h2></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-2">
+        <div class="list-group">
+          <!-- <a class="list-group-item" href="./about.html">About</a>
+          <a class="list-group-item active" href="./home.html">Home</a> -->
+          <router-link class="list-group-item" to='/about'>About</router-link>
+          <router-link class="list-group-item" to='/home'>Home</router-link>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="panel">
+          <div class="panel-body">
+
+             <keep-alive>
+              <router-view></router-view>
+              </keep-alive>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+ 
+ 
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from "./components/Header";
-  import Footer from "./components/Footer";
-  import List from "./components/List";
-
   export default {
-
-    components:{
-      Header,
-      Footer,
-      List 
-
-    },
-    data(){
-      return {
-        todos:[
-          {title:'吃饭',id:1,isCheck:false},
-          {title:'睡觉',id:2,isCheck:false},
-          {title:'打豆豆',id:3,isCheck:false},
-        ]
-
-
-      }
-
-    },
-    methods:{
-     addTodos(todo){
-
-        console.log(todo);
-        
-       this.todos.unshift(todo)
-
-     },
-     updateTodo(todo,value){
-
-       todo.isCheck = value
-
-     },
-     removeTodo(index){
-
-       this.todos.splice(index,1)
-
-     },
-     clearTodos(){
-
-      this.todos = this.todos.filter((todo)=>{
-         
-          return !todo.isCheck 
-       })
-      
-
-     },
-     ischeckall(value){
-
-        this.todos.forEach((todo)=> todo.isCheck = value)
-     }
-    }
   }
+  
 </script>
 
 <style scoped>

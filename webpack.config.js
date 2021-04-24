@@ -12,8 +12,9 @@ module.exports = {
   },
   output:{
   filename: 'static/js/[name].bundle.js',
-  path: path.resolve(__dirname,'dis')
-
+  path: path.resolve(__dirname,'dis'),
+  publicPath: '/'
+  
   },
   module:{
   rules:[
@@ -23,7 +24,12 @@ module.exports = {
     use:{
       loader: 'babel-loader',
       options:{ 
-        presets:['@babel/preset-env']
+        presets: [
+          ['@babel/preset-env', {
+            useBuiltIns: 'usage',
+            'corejs': 2 // 处理一些新语法的实现
+          }]
+        ], 
       }
     }
   },
@@ -70,7 +76,21 @@ module.exports = {
   },
   devServer: {
     open: true, // 自动打开浏览器
-    quiet: true, // 不做太多日志输出
+    quiet: true, // 不做太多日志输出 
+    proxy:{
+
+      '/api':{
+        target:'http://localhost:4000',
+        pathRewrite:{
+          '^/api' : '' 
+        }
+      },
+    
+
+
+    },
+    historyApiFallback: true,
+
   },
  
   devtool: 'cheap-module-eval-source-map'
