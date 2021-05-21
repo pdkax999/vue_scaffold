@@ -1,13 +1,12 @@
 import Vue from 'vue'
-import App from '@/App'
-import PubSub from 'pubsub-js'
+import App from './App.vue'
 
 Vue.config.productionTip=false
 
-Vue.prototype.PubSub = PubSub
-
-
 new Vue({
+    beforeCreate(){
+        Vue.prototype.$bus=this
+    },
     el:'#root',
     render: h => h(App)
 })

@@ -1,44 +1,73 @@
 <template>
-  
- <div>
-    <div class="row">
-      <div class="col-xs-offset-2 col-xs-8">
-        <div class="page-header"><h2>React Router Demo</h2></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2 col-xs-offset-2">
-        <div class="list-group">
-          <!-- <a class="list-group-item" href="./about.html">About</a>
-          <a class="list-group-item active" href="./home.html">Home</a> -->
-          <router-link class="list-group-item" to='/about'>About</router-link>
-          <router-link class="list-group-item" to='/home'>Home</router-link>
-        </div>
-      </div>
-      <div class="col-xs-6">
-        <div class="panel">
-          <div class="panel-body">
-
-             <keep-alive>
-              <router-view></router-view>
-              </keep-alive>
-
-          </div>
-        </div>
-      </div>
+   <div>
+    <Header></Header>
+    <div class="container">
+      <Add></Add>
+      <List ref="List"></List>
     </div>
   </div>
- 
- 
 </template>
 
-<script type="text/ecmascript-6">
-  export default {
+<script>
+import Header from './components/Header.vue'
+import Add from './components/Add.vue'
+import List from './components/List.vue'
+export default {
+  components: { 
+      Header ,
+      Add,
+      List
+  },
+  mounted(){
+
+    this.$refs.List.$emit('getComments',this.comments);
+
+   /*  this.PubSub.subscribe('add',(msg,comment)=>{
+          
+       
+       
+
+
+    }) */
+
+  },
+  data(){
+    return {
+
+      comments:[
+        {
+          name:'老师',
+          title:'react不是很难 ?',
+          id: 1          
+        },
+        {
+          name:'班长',
+          title:'react很难 ?',
+          id: 2     
+        },
+        {
+          name:'我',
+          title:'react努力就超级简单 ?',
+          id: 3          
+        }
+      ]
+      
+    }
+
+  },
+  methods:{
+  removeComment(comment){
+
+   this.comments.splice(this.comments.indexOf(comment),1);
+
+  },
+  addComment(com){
+     this.comments.unshift(com); 
   }
-  
+  }
+}
 </script>
 
 <style scoped>
 
- 
 </style>

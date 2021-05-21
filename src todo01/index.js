@@ -9,5 +9,10 @@ import App from "@/App.vue";
     components:{
       App
     },
+    beforeCreate(){
+
+      Vue.prototype.$bus = this
+
+    },
      template: '<App/>'
   }).$mount('#root')
