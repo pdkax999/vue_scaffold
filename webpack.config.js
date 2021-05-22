@@ -43,6 +43,16 @@ module.exports = {
     use: ['vue-style-loader','css-loader'],
   },
   {
+    test: /\.less$/,
+    use: [
+      'style-loader',
+      'css-loader',
+      // 将less文件编译成css文件
+      // 需要下载 less-loader和less
+      'less-loader'
+    ]
+  },
+  {
     test: /\.(png|jpg|gif)$/i,
     use:[
      {
